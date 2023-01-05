@@ -4,15 +4,14 @@ import { lambda_layer_kubectl, Stack, StackProps } from 'aws-cdk-lib';
 import { aws_eks as eks } from 'aws-cdk-lib';
 import { aws_ec2 as ec2 } from 'aws-cdk-lib';
 import { KubectlLayer } from 'aws-cdk-lib/lambda-layer-kubectl';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class EksTestStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const eksCluster = new eks.Cluster(this, 'HelloEKS', {
+    const eksCluster = new eks.Cluster(this, 'BC-EKS', {
       version: eks.KubernetesVersion.V1_21,
-      //: KubectlLayer.fromLayerVersionAttributes.
+      // kubectlLayer: new KubectlV24Layer(this, 'kubectl')
     })
 
     const nodeGroup = new eks.Nodegroup(this, "NodeGroup1", {
